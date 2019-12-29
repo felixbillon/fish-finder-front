@@ -1,7 +1,15 @@
 <template>
-  <div>
-    {{ fish.commonName }}
-  </div>
+  <v-card>
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div>FISH</div>
+        <v-list-item-title>{{ fish.commonName }}</v-list-item-title>
+        <v-list-item-subtitle>Test</v-list-item-subtitle>
+      </v-list-item-content>
+
+      <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+    </v-list-item>
+  </v-card>
 </template>
 
 <script lang="ts">

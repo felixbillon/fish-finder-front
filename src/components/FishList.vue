@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <Fish v-for="fish in state.data" :fish="fish" :key="fish.id" />
-  </div>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <v-row align="center" justify="space-between" style="height: 300px;">
+          <Fish v-for="fish in state.data" :fish="fish" :key="fish.id" />
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
