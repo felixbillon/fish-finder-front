@@ -22,7 +22,7 @@ export default createComponent({
   name: "FishList",
   setup() {
     const state = useFishApi();
-    console.log(state);
+
     return {
       state
     };

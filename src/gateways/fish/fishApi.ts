@@ -14,7 +14,7 @@ export const useFishApi = () => {
         state.data = response.data;
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       });
   });
 
