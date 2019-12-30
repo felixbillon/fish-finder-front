@@ -1,0 +1,38 @@
+variables:
+- template: templates/vars.yml
+
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- template: templates/build-test-steps.yml
+
+- task: CopyFiles@2
+  displayName: Copy dist folder
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/dist'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish artifact
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise(029f9640-eb6c-4743-8413-87fac6a183f6)'
+    appType: 'webAppLinux'
+    WebAppName: 'dev-fishfinder-front'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/dist'
+    RuntimeStack: 'NODE|12-lts'

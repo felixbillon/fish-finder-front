@@ -1,12 +1,17 @@
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mount } from "@vue/test-utils";
+import Fish from "@/components/Fish.vue";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe("Fish.vue", () => {
+  it("should have a custom title and match snapshot", () => {
+    const wrapper = mount(Fish, {
+      propsData: {
+        fish: {
+          commonName: "salomon"
+        }
+      }
     });
-    expect(wrapper.text()).toMatch(msg);
+
+    // With jest we can create snapshot files of the HTML output
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });

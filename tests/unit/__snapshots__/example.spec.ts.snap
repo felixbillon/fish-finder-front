@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fish.vue should have a custom title and match snapshot 1`] = `
+<div class="v-card v-sheet theme--light">
+  <div tabindex="-1" class="v-list-item v-list-item--three-line theme--light">
+    <div class="v-list-item__content">
+      <div>FISH</div>
+      <div class="v-list-item__title">salomon</div>
+      <div class="v-list-item__subtitle">Test</div>
+    </div>
+    <div class="v-avatar v-list-item__avatar v-avatar--tile grey" style="height: 80px; min-width: 80px; width: 80px;"></div>
+  </div>
+</div>
+`;
