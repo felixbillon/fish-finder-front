@@ -28,11 +28,12 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- task: AzureRmWebAppDeployment@4
+- task: Docker@2
+  displayName: Build and push an image to ACR
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Visual Studio Enterprise(029f9640-eb6c-4743-8413-87fac6a183f6)'
-    appType: 'webAppLinux'
-    WebAppName: 'dev-fishfinder-front'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/dist'
-    RuntimeStack: 'NODE|12-lts'
+    repository: fish-front
+    Dockerfile: Dockerfile
+    containerRegistry: FishFinderHub
+    tags: |
+          $(Build.BuildId)
+          latest
