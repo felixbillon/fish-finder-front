@@ -3,7 +3,7 @@ import Fish from "@/components/Fish.vue";
 
 describe("Fish.vue", () => {
   it("should have a custom title and match snapshot", () => {
-    const wrapper = mount(Fish as any, {
+    const wrapper = mount(Fish, {
       propsData: {
         fish: {
           commonName: "salomon"

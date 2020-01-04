@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   preset: "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
   setupFiles: ["<rootDir>/tests/unit/setup.ts"],
@@ -16,5 +18,10 @@ module.exports = {
       }
     ]
   ],
-  coverageReporters: ["json", "cobertura", "html"]
+  coverageReporters: ["json", "cobertura", "html"],
+  globals: {
+    "ts-jest": {
+      tsConfig: path.resolve(__dirname, "tsconfig.test.json")
+    }
+  }
 };
