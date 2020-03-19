@@ -1,17 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <FishList />
+    Welcom to Fish Finder
   </div>
 </template>
-
-<script>
-import FishList from "@/components/FishList.vue";
-
-export default {
-  name: "home",
-  components: {
-    FishList
-  }
-};
-</script>

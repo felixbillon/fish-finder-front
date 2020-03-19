@@ -1,31 +1,38 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-row align="center" justify="space-between" style="height: 300px;">
-          <Fish v-for="fish in state.data" :fish="fish" :key="fish.id" />
-        </v-row>
-      </v-col>
-    </v-row>
+    <v-col cols="12">
+      <v-row align="center" justify="start">
+        <Fish v-for="fish in fishes" :fish="fish" :key="fish.id" />
+      </v-row>
+    </v-col>
   </v-container>
 </template>
 
 <script lang="ts">
-import { createComponent, onMounted } from "@vue/composition-api";
-import { useFishApi } from "@/gateways/fish/fishApi";
+import { defineComponent, onMounted } from "@vue/composition-api";
 import Fish from "@/components/Fish.vue";
+import { createNamespacedHelpers } from "vuex";
+import { useState, useActions } from "@u3u/vue-hooks";
 
-export default createComponent({
+export default defineComponent({
   components: {
     Fish
   },
   name: "FishList",
   setup() {
-    const state = useFishApi();
-
-    return {
-      state
+    const state = {
+      ...useState("fish", ["fishes"])
     };
+
+    const actions = {
+      ...useActions("fish", ["fetchFish"])
+    };
+
+    const { fetchFish } = actions;
+
+    fetchFish();
+
+    return { ...state };
   }
 });
 </script>

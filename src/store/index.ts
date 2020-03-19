@@ -1,11 +1,19 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { StoreOptions } from "vuex";
+import { fishModule } from "./module/fish";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export interface RootState {}
+
+const store: StoreOptions<RootState> = {
   state: {},
   mutations: {},
   actions: {},
-  modules: {}
-});
+  modules: {
+    fish: fishModule
+  },
+  strict: process.env.NODE_ENV !== "production"
+};
+
+export default new Vuex.Store(store);

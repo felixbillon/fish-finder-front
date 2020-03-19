@@ -1,8 +1,5 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: `http://${process.env.API_BASE_URL}:${process.env.API_PORT}/`
-  // headers: {
-  //     Authorization: 'Bearer {token}'
-  // }
+  baseURL: `http://${process.env.VUE_APP_API_BASE_URL}:${process.env.VUE_APP_API_PORT}/`
 });

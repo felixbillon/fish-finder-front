@@ -4,9 +4,11 @@ import router from "./router";
 import store from "./store";
 import VueCompositionApi from "@vue/composition-api";
 import vuetify from "./plugins/vuetify";
+import hooks from "@u3u/vue-hooks";
 
 Vue.config.productionTip = false;
 
+Vue.use(hooks);
 Vue.use(VueCompositionApi);
 
 new Vue({
