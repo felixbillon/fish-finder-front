@@ -27,9 +27,7 @@
       "scripthost"
     ]
   },
-  "include": ["src"],
-  "exclude": [
-    "**/*.story.*",
-    "**/*.test.*"
+  "include": [
+      "./src/**/*"
   ]
 }

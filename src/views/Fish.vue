@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import FishList from "@/components/FishList.vue";
+import FishList from "@/components/FishList/FishList.vue";
 import { defineComponent } from "@vue/composition-api";
 
 export default defineComponent({

@@ -3,6 +3,12 @@ const path = require("path");
 module.exports = {
   preset: "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
   setupFiles: ["<rootDir>/tests/unit/setup.ts"],
+  testMatch: ["<rootDir>/src/**/?(*.)+(spec|test).[jt]s?(x)"],
+  testPathIgnorePatterns: ["/node_modules/"],
+  collectCoverageFrom: [
+    "<rootDir>/**/src/(components|views|store|gateways)*(/**)/!(*.d).{ts,tsx,vue}",
+    "!<rootDir>/**/src/**/index.{js,ts}"
+  ],
   reporters: [
     "default",
     [
@@ -18,10 +24,5 @@ module.exports = {
       }
     ]
   ],
-  coverageReporters: ["json", "cobertura", "html"],
-  globals: {
-    "ts-jest": {
-      tsConfig: path.resolve(__dirname, "tsconfig.test.json")
-    }
-  }
+  coverageReporters: ["json", "cobertura", "html"]
 };

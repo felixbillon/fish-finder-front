@@ -28,7 +28,6 @@ export const fishModule: Module<FishState, RootState> = {
             resolve();
           })
           .catch(error => {
-            console.log(error);
             reject(error);
           });
       });

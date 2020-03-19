@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "@vue/composition-api";
-import Fish from "@/components/Fish.vue";
+import Fish from "@/components/Fish/Fish.vue";
 import { createNamespacedHelpers } from "vuex";
 import { useState, useActions } from "@u3u/vue-hooks";
 
