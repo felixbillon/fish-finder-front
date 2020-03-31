@@ -1,38 +1,66 @@
 <template>
   <v-container fluid>
+    <FishAddModal
+      :isDisplay="isFishModalDisplayed"
+      @close="toogleFishAddModal()"
+      @save="saveFish"
+    />
     <v-col cols="12">
       <v-row align="center" justify="start">
-        <Fish v-for="fish in fishes" :fish="fish" :key="fish.id" />
+        <FishComponent v-for="fish in fishes" :fish="fish" :key="fish.id" />
       </v-row>
     </v-col>
+    <v-btn
+      bottom
+      color="pink"
+      dark
+      fab
+      fixed
+      right
+      @click="toogleFishAddModal()"
+    >
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "@vue/composition-api";
-import Fish from "@/components/Fish/Fish.vue";
-import { createNamespacedHelpers } from "vuex";
-import { useState, useActions } from "@u3u/vue-hooks";
+import { defineComponent } from "@vue/composition-api";
+import FishComponent from "@/components/Fish/Fish.vue";
+import FishAddModal from "@/components/FishAddModal/FishAddModal.vue";
+import { useState, useActions, useMutations } from "@u3u/vue-hooks";
+import { Fish } from "../../gateways/fish/Fish";
 
 export default defineComponent({
   components: {
-    Fish
+    FishComponent,
+    FishAddModal
   },
   name: "FishList",
   setup() {
     const state = {
-      ...useState("fish", ["fishes"])
+      ...useState("fish", ["fishes", "isFishModalDisplayed"])
     };
+
+    const mutations = {
+      ...useMutations("fish", ["toogleFishAddModal"])
+    };
+
+    const { toogleFishAddModal } = mutations;
 
     const actions = {
-      ...useActions("fish", ["fetchFish"])
+      ...useActions("fish", ["fetchFish", "addFish"])
     };
 
-    const { fetchFish } = actions;
+    const { fetchFish, addFish } = actions;
 
     fetchFish();
 
-    return { ...state };
+    function saveFish(fish: Fish) {
+      addFish(fish) && toogleFishAddModal();
+    }
+
+    return { ...state, ...mutations, ...actions, saveFish };
   }
 });
 </script>

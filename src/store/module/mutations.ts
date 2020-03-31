@@ -1,1 +1,2 @@
-export const SET_FISH = "SET_FISH";
+export const setFish = "setFish";
+export const toogleFishAddModal = "toogleFishAddModal";

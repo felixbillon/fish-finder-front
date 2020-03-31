@@ -1,5 +1,5 @@
 export interface Fish {
-  id: number;
+  id?: number;
   commonName: string;
   scientificName: string;
   maxLenght: number;

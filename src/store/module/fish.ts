@@ -1,22 +1,27 @@
-import { getAllFish } from "@/gateways/fish/fishApi";
+import { getAllFish, saveFish } from "@/gateways/fish/fishApi";
 import { Fish } from "@/gateways/fish/Fish";
 import { Module } from "vuex";
 import { RootState } from "..";
-import { SET_FISH } from "./mutations";
-import { fetchFish } from "./action";
+import { toogleFishAddModal, setFish } from "./mutations";
+import { fetchFish, addFish } from "./action";
 
 export interface FishState {
   fishes: Fish[];
+  isFishModalDisplayed: boolean;
 }
 
 export const fishModule: Module<FishState, RootState> = {
   namespaced: true,
   state: {
-    fishes: []
+    fishes: [],
+    isFishModalDisplayed: false
   },
   mutations: {
-    [SET_FISH](state, fish) {
+    [setFish](state, fish) {
       state.fishes = fish;
+    },
+    [toogleFishAddModal](state) {
+      state.isFishModalDisplayed = !state.isFishModalDisplayed;
     }
   },
   actions: {
@@ -24,8 +29,20 @@ export const fishModule: Module<FishState, RootState> = {
       return new Promise((resolve, reject) => {
         getAllFish()
           .then(response => {
-            commit(SET_FISH, response.data);
+            commit(setFish, response.data);
             resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    [addFish]({ dispatch }, fish: Fish) {
+      return new Promise((resolve, reject) => {
+        saveFish(fish)
+          .then(response => {
+            dispatch(fetchFish);
+            resolve(response);
           })
           .catch(error => {
             reject(error);
