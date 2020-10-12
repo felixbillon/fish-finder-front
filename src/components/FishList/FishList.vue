@@ -60,6 +60,8 @@ export default defineComponent({
       addFish(fish) && toogleFishAddModal();
     }
 
+    // function upload()
+
     return { ...state, ...mutations, ...actions, saveFish };
   }
 });

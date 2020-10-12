@@ -80,6 +80,10 @@
 
 <script lang="ts">
 import { defineComponent } from "@vue/composition-api";
+import {
+  startSocket,
+  recognize
+} from "./gateways/fish-recognizer/fish-recognizer";
 
 export default defineComponent({
   data: () => ({
@@ -94,6 +98,12 @@ export default defineComponent({
         children: [{ icon: "mdi-plus", text: "All fish", link: "/fish" }]
       }
     ]
-  })
+  }),
+  created: () => {
+    recognize().then((data: any) => {
+      console.log("success");
+      console.log("data client : ", data);
+    });
+  }
 });
 </script>
